@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+
+  <%- include('../Components/head.ejs', {pageTitle: "Edit Page"}) %>
+  
+  <body>
+   
+    <%- include('../Components/dark-light.ejs') %>
+
+    <main class="d-flex flex-nowrap">
+      
+      <%- include('../Components/sidebar.ejs', {currentPage: "edit"}) %>
+
+      <section class="w-100">
+        
+        <%- include('../Components/navbar.ejs') %>
+
+        <nav class="px-2 mt-4 d-flex flex-wrap justify-content-between" aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><%= `${user.firstName} ${user.lastName}` %></li>
+          </ol>
+
+          <p class="me-md-5"> <span class="fw-medium fs-6">Id :</span> <%= user._id %></p>
+        </nav>
+
+        <form class="mx-0 row gx-3 gy-4 mt-3"action="/edit/<%= user._id%>?_method=PUT" method="post">
+          
+          <div class="col-md-6">
+            <label for="inputfirstName4" class="form-label">First Name:</label>
+            <input type="text" class="form-control" id="inputfirstName4" name="firstName" value="<%= user.firstName %>" />
+          </div>
+          
+          <div class="col-md-6">
+            <label for="inputlastName4" class="form-label">Last Name:</label>
+            <input type="text" class="form-control" id="inputlastName4" name="lastName" value="<%= user.lastName %>" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputemail4" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="inputemail4" name="email" value="<%= user.email %>"/>
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputtele4" class="form-label">Telephone:</label>
+            <input type="number" class="form-control" id="inputtele4" name="phoneNumber" value="<%= user.phoneNumber %>"/>
+          </div>
+
+
+          <div class="col-md-6">
+            <label for="inputage4" class="form-label">Age:</label>
+            <input type="number" class="form-control" id="inputage4" name="age" value="<%= user.age %>"/>
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputCountry" class="form-label">Country:</label>
+            <select id="inputCountry" class="form-select" name="country">
+              <% countries.forEach((country) => { %>
+                <option <%= user.country === country? "selected" : null %> value="<%= country %>"><%= country %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputGender" class="form-label">Gender:</label>
+            <select id="inputGender" class="form-select" name="gender" value="<%= user.gender %>">
+              <% genders.forEach((gender) => { %>
+                <option <%= user.gender === gender? "selected" : null %> value="<%= gender %>"><%= gender %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="col-12">
+              <button type="submit" class="btn btn-primary">Update changes</button>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" class="btn btn-danger">Delete Customer</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Delete Customer
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">Are you sure you want to continue delete the customer?</div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Close
+              </button>
+              <form action="/edit/<%= user._id%>?_method=DELETE" method="post">
+                <button type="submit" class="btn btn-danger">
+                  Delete
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+
+    <script src="../js/sidebars.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>

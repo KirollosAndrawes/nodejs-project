@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+
+  <%- include('../Components/head.ejs', {pageTitle: "Add Page"}) %>
+  
+  <body>
+
+    <%- include('../Components/dark-light.ejs') %>
+
+    <main class="d-flex flex-nowrap">
+      
+      <%- include('../Components/sidebar.ejs', {currentPage: "add"}) %>
+
+      <section class="w-100">
+      
+        <%- include('../Components/navbar.ejs') %>
+
+        <form class="mx-0 row gx-3 gy-4 mt-3" method="post" action="/user/add">
+          
+          <div class="col-md-6">
+            <label for="inputfirstName4" class="form-label">First Name:</label>
+            <input placeholder="Kiro..." type="text" class="form-control" id="inputfirstName4" name="firstName" />
+          </div>
+          
+          <div class="col-md-6">
+            <label for="inputlastName4" class="form-label">Last Name:</label>
+            <input placeholder="Samir..." type="text" class="form-control" id="inputlastName4" name="lastName" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputemail4" class="form-label">Email:</label>
+            <input placeholder="kiro@gmail.com" type="email" class="form-control" id="inputemail4" name="email"/>
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputtele4" class="form-label">Telephone:</label>
+            <input placeholder="01208277703" type="number" class="form-control" id="inputtele4" name="phoneNumber"/>
+          </div>
+
+
+          <div class="col-md-6">
+            <label for="inputage4" class="form-label">Age:</label>
+            <input placeholder="Your Age: ..." type="number" class="form-control" id="inputage4" name="age"/>
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputCountry" class="form-label">Country:</label>
+            <select id="inputCountry" class="form-select" name="country">
+              <option selected hidden disabled>Choose here ...</option>
+              <% countries.forEach((country) => { %>
+                <option value="<%= country %>"><%= country %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="inputGender" class="form-label">Gender:</label>
+            <select id="inputGender" class="form-select" name="gender">
+              <option selected hidden disabled>Choose here ...</option>
+              <% genders.forEach((gender) => { %>
+                <option value="<%= gender %>"><%= gender %></option>
+              <% }) %>
+            </select>
+          </div>
+
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </section>
+    </main>
+    <script src="../js/bootstrap.bundle.min.js"></script>
+
+    <script src="../js/sidebars.js"></script>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
